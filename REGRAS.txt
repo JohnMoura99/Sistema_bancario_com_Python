@@ -1,0 +1,29 @@
+SISTEMA BANCARIO:
+
+-saque
+-deposito 
+-visualização de extrato
+- a v1 do projeto trabalha apenas com 1 usuario
+
+REGRA:
+
+1.Operação de Depósito:
+
+-O sistema deve perguntar ao usuário qual valor ele deseja depositar.
+-O valor do depósito deve ser um número inteiro e positivo.
+Todos os depósitos devem ser armazenados em uma variável.
+-Os depósitos devem ser exibidos na operação de extrato.
+
+2.Operação de Saque:
+
+-O sistema deve permitir até 3 saques diários.
+-Cada saque tem um limite máximo de R$ 500,00.
+-O sistema deve verificar se há saldo suficiente para realizar o saque.
+-Todos os saques devem ser armazenados em uma variável.
+Os saques devem ser exibidos na operação de extrato.
+
+3.Operação de Extrato:
+
+-A operação de extrato deve listar todos os depósitos e saques realizados na conta.
+-No final da listagem, deve ser exibido o saldo atual da conta.
+-Os valores devem ser exibidos no formato "R$ xxx.xx".
