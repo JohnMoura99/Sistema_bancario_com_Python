@@ -1,3 +1,6 @@
+PRIMEIRA VERSÃO:
+
+
 SISTEMA BANCARIO:
 
 -saque
@@ -27,3 +30,51 @@ Os saques devem ser exibidos na operação de extrato.
 -A operação de extrato deve listar todos os depósitos e saques realizados na conta.
 -No final da listagem, deve ser exibido o saldo atual da conta.
 -Os valores devem ser exibidos no formato "R$ xxx.xx".
+
+
+----------------------------------------------------------------------------------------------------------
+SEGUNDA VERSÃO:
+
+Funções Existentes
+
+Saque
+    Requisitos:
+
+    Receber os argumentos apenas por nome (keyword only).
+    Sugestão de argumentos: saldo, valor, extrato, limite, numero_saques, limite_saques.
+    Sugestão de retorno: saldo e extrato.
+
+Depósito
+    Requisitos:
+    Receber os argumentos apenas por posição (positional only).
+    Sugestão de argumentos: saldo, valor, extrato.
+    Sugestão de retorno: saldo e extrato.
+
+Extrato
+    Requisitos:
+    Receber os argumentos por posição e nome (positional only e keyword only).
+    Argumentos posicionais: saldo.
+    Argumentos nomeados: extrato.
+
+Novas Funções
+
+Criar Usuário
+    Requisitos:
+    Deve armazenar os usuários em uma lista.
+    Um usuário é composto por: nome, data de nascimento, CPF e endereço.
+    O endereço é uma string com o formato: "logradouro, nro - bairro - cidade/sigla estado".
+    Deve ser armazenado somente os números do CPF.
+    Não pode haver dois usuários com o mesmo CPF.
+Criar Conta Corrente
+    Requisitos:
+
+    O programa deve armazenar contas em uma lista.
+    A conta é composta por: agência, número da conta e usuário.
+    O número da conta é sequencial, iniciado em 1.
+    O número da agência é fixo: "0001".
+    O usuário pode ter mais de uma conta, mas uma conta pertence a somente um usuário.
+    O número da conta vai aumentando de um em um conforme novas contas são criadas.
+    Vincular Usuário a Conta:
+
+    Para vincular um usuário a uma conta, filtre a lista de usuários buscando o número do CPF 
+    informado para cada usuário da lista.
