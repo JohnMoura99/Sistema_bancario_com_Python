@@ -1,4 +1,4 @@
-PRIMEIRA VERSÃO:
+PRIMEIRA VERSÃO: V0.0.1
 
 
 SISTEMA BANCARIO:
@@ -33,7 +33,7 @@ Os saques devem ser exibidos na operação de extrato.
 
 
 ----------------------------------------------------------------------------------------------------------
-SEGUNDA VERSÃO:
+SEGUNDA VERSÃO:0.1.0
 
 Funções Existentes
 
@@ -78,3 +78,17 @@ Criar Conta Corrente
 
     Para vincular um usuário a uma conta, filtre a lista de usuários buscando o número do CPF 
     informado para cada usuário da lista.
+
+----------------------------------------------------------------------------------------------------------
+SEGUNDA VERSÃO:0.2.0
+
+Atualização da implementação do sistema bancário para armazenar os dados de clientes e contas bancárias em objetos,
+seguindo o modelo de classes UML fornecido. Esta atualização inclui a modelagem de classes, a criação de métodos e 
+a atualização dos métodos que lidam com as opções do menu para funcionar com as classes modeladas.
+
+ATUALIZAÇÕES:
+
+-Cadastro de conta.
+-Conta tem vínculo com usuário.
+-A conta tem histórico.
+-O extrato é por conta e não geral.
