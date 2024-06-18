@@ -92,3 +92,39 @@ ATUALIZAÇÕES:
 -Conta tem vínculo com usuário.
 -A conta tem histórico.
 -O extrato é por conta e não geral.
+
+----------------------------------------------------------------------------------------------------------
+TERCEIRA VERSÃO:0.3.0
+
+Com os novos conhecimentos adquiridossobre decoradores, geradores e iteradores, vamos iplementar as
+seguintes funcionalidade no sistema:
+
+- Decorador de log  - V
+- Gerador de relatorios -
+- Iterador personalizado
+
+Decorador de log:
+
+Implementar um decorador que seja aplicado a todas as funções de transação(depósito, saque, criação de conta, etc).
+Esse decorador deve registrar(printar) a data e hora de cada transação, bem como o tipo de transação.
+
+Gerador de relatorios:
+
+Crie um gerador que permita iterar sobre as transações de uma conta e retorne, uma a uma, as transações que foram
+realizadas. Esses gerador deve também ter uma forma de filtrar as transações baseado em seu tipo (por exemplo, apenas saques 
+ou apenas depósitos)
+
+Iterador personalizado:
+
+Implemente um iterador personalizado "ContaIterador" que permita iterar sobre todas as contas do banco, retornando informações
+básicas de cada conta(número, saldo atual, etc).
+
+
+***********
+novas funcionalidade implementadas:
+-Estabelecer um limite de 10 transações diárias para uma conta.
+
+-Se o usuário tentar fazer uma transação após atingir o limite, deve ser
+informado que ele excedeu o número de transações permitidas para aquele dia.
+
+-Mostre no extrato,  a data e hora de todas as transações.
