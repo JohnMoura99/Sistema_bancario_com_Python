@@ -1,17 +1,31 @@
 from abc import ABC, abstractmethod
 from datetime import datetime
 from datetime import datetime
+from pathlib import Path
 
+ROOT_PATH = Path(__file__).parent
 
 class ContaIterador:
     def __init__(self, contas):
-        pass
+        self.contas = contas
+        self._index = 0
 
     def __iter__(self):
-        pass
+        return self#instancia propria do iterador, ele mesmo
 
     def __next__(self):
-        pass
+        try:
+            conta = self.contas[self._index] #acessa o indice atual dentro do array de contas(contas que foi passada ao iterados), que foi passada, ai ele retorna agencia,numero,titular e saldo
+            return f"""\
+            Agência:\t{conta.agencia}
+            Número:\t\t{conta.numero}
+            Titular:\t{conta.cliente.nome}
+            Saldo:\t\t{conta.saldo:.2f}
+            """
+        except IndexError:
+            return StopIteration #qaundo n tiver mais item de conta lança o stopiteration
+        finally:
+            self._index+=1
 
 
 class Cliente:
@@ -37,7 +51,11 @@ class PessoaFisica(Cliente):
         self.nome = nome
         self.data_nascimento = data_nascimento
         self.cpf = cpf
-
+    
+    def __repr__(self) -> str:#metodo de representação
+        return f"<Cliente: ({self.__class__.__name__} : ({self.cpf})>"
+        #quando ele é executado, é dessa forma que esta no return que ele vai apresentar pro Python uma instancia desse objeto PessoaFisica
+        #é bem parecido com o __str__, a diferença é que pro str é pra um dado mais legivel pra um humano(quando for mostrar algo ao usuario final),e o repr é pra essa questao de logs, vou salvar a informação do meu objeto em um arquivo de texto que vai ser consultado depois, ai quero a representação desse meu objeto em modo texto ai coloco esse __repr__, é legal ele ser um formato unico, pq dessa forma voce consegue identificar unicamente cada instancia de objeto, como a gente so pode ter um usuario por cpf entao coloquei esse texto cocatenando com o cpf. 
 
 class Conta:  
     def __init__(self,numero,cliente):
@@ -127,6 +145,9 @@ class ContaCorrente(Conta):
             return super().sacar(valor)
         return False
     
+    def __repr__(self) -> str:
+        return f"<{self.__class__.__name__}:('{self.agencia}','{self.numero}','{self.cliente.nome}')>"
+
     def __str__(self):
         return f"""\
             Agência:\t{self.agencia}
@@ -210,26 +231,23 @@ class Deposito(Transacao):
         if sucesso_transacao:
             conta.historico.adicionar_transacao(self)##
 
+#para no log sair quanto que depositei(valor), precisamos alterar a forma que nosso deposito,saque e as outras operações elas foram feitas, pra isso precisaria passar "valor" como argumento na função "def depositar", pra isso precisariar tirar as linhas de codigo  valor e transação e colocar no deposito da main
 
-
-
-
-
-
-
-
-
-
-
-
+#apos encerrar e iniciar novamente no arquivo de texto os dados do cliente 1 permanece, porem eles não persistem, entao fica salvo no arquivo porem consigo criar outro cliente 1.
+# para resolver isso tem que persistir a lista de cliente e de contas da main.
 def log_transacao(func):
     def envelope(*args, **kwargs):
         resultado = func(*args, **kwargs)
-        print(f"{datetime.now()}: {func.__name__.upper()}")
+        data_hora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        with open(ROOT_PATH / "log.txt","a") as arquivo:
+             arquivo.write( f"[{data_hora}] Função '{func.__name__}' executada com argumentos {args} e {kwargs}. Retornou {resultado}\n")
+             
+            #modo "a" pq se o arquivo existir ele vai pegar e adicionar novas linhas no final desse arquivo
+       
         return resultado
 
     return envelope
-#exibir data e hora que foi executado e qual o nome da função
+
 
 def menu():
     menu = """\n
@@ -308,14 +326,14 @@ def exibir_extrato(clientes):
         return
     
     print("\n============== EXTRATO ==============")
-    trasacoes = conta.historico.transacoes
+    #trasacoes = conta.historico.transacoes
     extrato = " "
     tem_transacao = False
-    for transacao in conta.historico.gerar_relatorio():
+    for transacao in conta.historico.gerar_relatorio():#filtrar o deposito ou saque
         tem_transacao= True
         extrato += f"\n{transacao['data']}\n{transacao['tipo']}:\n\tR$ {transacao['valor']:.2f}"
 
-    if not trasacoes:
+    if not tem_transacao:
         extrato = "Não foram realizadas movimentações."
 
     print(extrato)
